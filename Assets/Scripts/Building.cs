@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-    [SerializeField] private float _incomePeriod = 5;
-    [SerializeField] private int _income = 15;
+    public BuildingData buildingData;
+        
     [SerializeField] private TMP_Text _incomeUI;
     [SerializeField] private CanvasGroup _infoUICanvasGroup;
     
@@ -60,8 +60,8 @@ public class Building : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(_incomePeriod);
-            _playerResources.AddMoney(_income);
+            yield return new WaitForSeconds(buildingData.incomePeriod);
+            _playerResources.AddMoney(buildingData.income);
             StartCoroutine(ShowIncomeUIRoutine());
         }
     }
@@ -69,7 +69,7 @@ public class Building : MonoBehaviour
     private IEnumerator ShowIncomeUIRoutine()
     {
         _incomeUI.gameObject.SetActive(true);
-        _incomeUI.text = "+" + _income;
+        _incomeUI.text = "+" + buildingData.income;
         yield return new WaitForSeconds(1);
         _incomeUI.gameObject.SetActive(false);
     }

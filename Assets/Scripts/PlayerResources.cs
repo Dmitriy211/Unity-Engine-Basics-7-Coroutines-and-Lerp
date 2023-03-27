@@ -13,6 +13,18 @@ public class PlayerResources : MonoBehaviour
         UpdateUI();
     }
 
+    public bool TrySpendMoney(int price)
+    {
+        if (_money > price)
+        {
+            _money -= price;
+            UpdateUI();
+            return true;
+        }
+
+        return false;
+    }
+    
     private void UpdateUI()
     {
         _moneyUI.text = _money.ToString();
